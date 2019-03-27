@@ -16,7 +16,8 @@
 #define HC12_TX 2
 #define HC12_SET 7
 #define RSB_AUX 6
-#define LED 13
+#define LED 9
+#define LED_NEGATIVE 8
 
 /* HC12 configuration */
 #define HC12_BAUDRATE 9600
@@ -61,6 +62,7 @@ void setup()
   // Pin modes
   pinMode(RSB_AUX, OUTPUT);
   pinMode(HC12_SET, OUTPUT);
+  pinMode(LED_NEGATIVE, OUTPUT);
   pinMode(LED, OUTPUT);
 
   // Reserve space for buffers
@@ -70,6 +72,10 @@ void setup()
   // Drive low DTR and CTS of RS232
   digitalWrite(RSB_AUX, LOW); // RS232 has inverted logic
 
+  // Init leds
+  digitalWrite(LED_NEGATIVE, LOW);
+  digitalWrite(LED, HIGH);
+  
   // Setup HC12
   uint8_t r = HC12_setup();
   if (r != Ok)
